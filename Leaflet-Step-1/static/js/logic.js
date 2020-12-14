@@ -18,3 +18,48 @@ var myMap = L.map("map", {
   });
   
   streetmap.addTo(myMap);
+
+// Store our API endpoint inside queryUrl
+var summaryqueryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+d3.json(summaryqueryUrl, function(data) {
+
+  /// Three functions created 
+  // Function one for style, function two for color and function three for radius
+
+  function mapStyle(feature) {
+    return {
+      opacity: 1,
+      fillOpacity: 1,
+      fillColor: mapColor(feature.properties.mag),
+      color: "#000000",
+      radius: mapRadius(feature.properties.mag),
+      stroke: true,
+      weight: 0.5
+    };
+  }
+  function mapColor(mag) {
+    switch (true) {
+      case mag > 5:
+        return "#ea2c2c";
+      case mag > 4:
+        return "#eaa92c";
+      case mag > 3:
+        return "#d5ea2c";
+      case mag > 2:
+        return "#92ea2c";
+      case mag > 1:
+        return "#2ceabf";
+      default:
+        return "#2c99ea";
+    }
+  }
+
+  function mapRadius(mag) {
+    if (mag === 0) {
+      return 1;
+    }
+
+    return mag * 4;
+  }
+
+  
