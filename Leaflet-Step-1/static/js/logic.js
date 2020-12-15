@@ -93,7 +93,7 @@ d3.json(summaryqueryUrl, function(data) {
       "<i style='background: " + colors[i] + "'></i> " +
       grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
     }
-    return div;
+    return div; 
 
   };
 
